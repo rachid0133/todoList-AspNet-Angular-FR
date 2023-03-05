@@ -1,5 +1,6 @@
 <h1>My todos</h1>
 
-<ul>
+<!-- <ul>
     <li *ngFor="let todo of todos">{{todo.text}}</li>
-</ul>
+</ul> -->
+<p-listbox [options]="todos" optionLabel="text"></p-listbox>

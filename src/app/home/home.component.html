@@ -3,4 +3,7 @@
 <!-- <ul>
     <li *ngFor="let todo of todos">{{todo.text}}</li>
 </ul> -->
-<p-listbox [options]="todos" optionLabel="text"></p-listbox>
+<p-listbox [options]="noneCompletedTodos" [(ngModel)]="selectedTodo" optionLabel="text"
+    (onChange)="onTodoSelect()"></p-listbox>
+
+<p-button label="Complete" *ngIf="!!selectedTodo" (onClick)="onComplete()"></p-button>

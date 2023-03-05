@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { ListboxModule } from 'primeng/listbox';
+import { FormsModule } from "@angular/forms";
+import { ButtonModule } from 'primeng/button';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +16,8 @@ import { HomeComponent } from './home/home.component';
     HomeComponent
   ],
   imports: [
+    ButtonModule,
+    FormsModule,
     ListboxModule,
     CommonModule,
     BrowserModule,

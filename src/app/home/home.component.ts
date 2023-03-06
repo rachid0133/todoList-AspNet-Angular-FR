@@ -8,7 +8,7 @@ import { Todo } from '../models/todo.model';
 })
 export class HomeComponent implements OnInit {
 
-  allTodos: Todo[] = [
+  private allTodos: Todo[] = [
     { text: 'text1', completed: false },
     { text: 'text2', completed: false },
     { text: 'text3', completed: false },
@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
 
   noneCompletedTodos: Todo[] = [];
   selectedTodo: Todo | undefined;
+  newTodo: string = '';
+
   constructor() { }
 
   ngOnInit(): void {
@@ -31,6 +33,13 @@ export class HomeComponent implements OnInit {
   onComplete() {
     if (!this.selectedTodo) return;
     this.selectedTodo.completed = true;
+    this.loadTodos();
+  }
+
+  onAdd() {
+    if (!this.newTodo) return;
+    const myNewTodo: Todo = { text: this.newTodo, completed: false };
+    this.allTodos.push(myNewTodo);
     this.loadTodos();
   }
 

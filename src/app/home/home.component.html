@@ -1,9 +1,11 @@
 <h1>My todos</h1>
+<div>
+    <input type="text" pInputText [(ngModel)]="newTodo"/>
+    <p-button label="Add" (onClick)="onAdd()"></p-button>
+</div>
+<div class="my-4">
+    <p-listbox [options]="noneCompletedTodos" [(ngModel)]="selectedTodo" optionLabel="text"
+        (onChange)="onTodoSelect()"></p-listbox>
 
-<!-- <ul>
-    <li *ngFor="let todo of todos">{{todo.text}}</li>
-</ul> -->
-<p-listbox [options]="noneCompletedTodos" [(ngModel)]="selectedTodo" optionLabel="text"
-    (onChange)="onTodoSelect()"></p-listbox>
-
-<p-button label="Complete" *ngIf="!!selectedTodo" (onClick)="onComplete()"></p-button>
+    <p-button label="Complete" *ngIf="!!selectedTodo" (onClick)="onComplete()"></p-button>
+</div>

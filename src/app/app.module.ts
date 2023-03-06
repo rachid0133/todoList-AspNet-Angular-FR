@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ListboxModule } from 'primeng/listbox';
 import { FormsModule } from "@angular/forms";
 import { ButtonModule } from 'primeng/button';
-import {InputTextModule} from 'primeng/inputtext';
+import { InputTextModule } from 'primeng/inputtext';
+import { HttpClientModule } from '@angular/common/http'
 
 
 
@@ -18,6 +19,7 @@ import { HomeComponent } from './home/home.component';
     HomeComponent
   ],
   imports: [
+    HttpClientModule,
     InputTextModule,
     ButtonModule,
     FormsModule,

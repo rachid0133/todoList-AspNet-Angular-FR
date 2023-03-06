@@ -6,7 +6,7 @@
     </span>
 </div>
 <div class="my-2">
-    <p-listbox [options]="noneCompletedTodos" [(ngModel)]="selectedTodo" optionLabel="text"
+    <p-listbox [options]="todos | async" [(ngModel)]="selectedTodo" optionLabel="text"
         (onChange)="onTodoSelect()"></p-listbox>
 
     <div class="my-2">

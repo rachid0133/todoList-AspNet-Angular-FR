@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../models/todo.model';
+import { TodosService } from '../services/todos.service';
 
 @Component({
   selector: 'app-home',
@@ -8,18 +9,11 @@ import { Todo } from '../models/todo.model';
 })
 export class HomeComponent implements OnInit {
 
-  private allTodos: Todo[] = [
-    { text: 'text1', completed: false },
-    { text: 'text2', completed: false },
-    { text: 'text3', completed: false },
-    { text: 'text4', completed: false }
-  ];
-
   noneCompletedTodos: Todo[] = [];
   selectedTodo: Todo | undefined;
   newTodo: string = '';
 
-  constructor() { }
+  constructor(private todoService: TodosService) { }
 
   ngOnInit(): void {
     this.loadTodos();
@@ -39,12 +33,14 @@ export class HomeComponent implements OnInit {
   onAdd() {
     if (!this.newTodo) return;
     const myNewTodo: Todo = { text: this.newTodo, completed: false };
-    this.allTodos.push(myNewTodo);
+    this.todoService.allTodos.push(myNewTodo);
     this.loadTodos();
   }
 
   private loadTodos() {
-    this.noneCompletedTodos = this.allTodos.filter(t => !t.completed);
+    this.noneCompletedTodos = this.todoService.allTodos.filter(t => !t.completed);
+    this.selectedTodo = undefined;
+    this.newTodo = '';
   }
 
 }

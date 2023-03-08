@@ -11,6 +11,7 @@ import { TodosService } from '../services/todos.service';
 export class HomeComponent implements OnInit {
 
   // noneCompletedTodos: Todo[] = [];
+  // todos : Observable<Todo[]>|undefined;
   todos : Observable<Todo[]>|undefined;
   selectedTodo: Todo | undefined;
   newTodo: string = '';

@@ -29,15 +29,20 @@ export class HomeComponent implements OnInit {
 
   onComplete() {
     if (!this.selectedTodo) return;
-    this.selectedTodo.completed = true;
-    this.loadTodos();
+    //this.selectedTodo.completed = true;
+    this.todoService.completeTodo(this.selectedTodo.id).subscribe(()=>{
+      this.loadTodos();
+    });
+    
   }
 
   onAdd() {
     if (!this.newTodo) return;
-    const myNewTodo: Todo = { text: this.newTodo, completed: false };
+    const myNewTodo: Todo = {id: 0, text: this.newTodo, completed: false };
     // this.todoService.allTodos.push(myNewTodo);
-    this.loadTodos();
+    this.todoService.addTodo(myNewTodo).subscribe(()=>{
+      this.loadTodos();
+    });
   }
 
   private loadTodos() {

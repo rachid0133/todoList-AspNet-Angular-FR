@@ -20,6 +20,6 @@ export class TodosService {
   }
 
   completeTodo(id:number){
-    return this.http.post(BASE_URL+'/todos/'+id,null);
+    return this.http.post(`${BASE_URL}/todos/${id}/complete`,null);
   }
 }

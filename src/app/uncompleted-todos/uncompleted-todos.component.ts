@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Todo } from '../models/todo.model';
 import { TodosService } from '../services/todos.service';
@@ -8,7 +8,9 @@ import { TodosService } from '../services/todos.service';
   templateUrl: './uncompleted-todos.component.html',
   styleUrls: ['./uncompleted-todos.component.scss']
 })
-export class UncompletedTodosComponent {
+export class UncompletedTodosComponent implements OnInit {
+
+  @Output() todoCompleted = new EventEmitter();
 
   // noneCompletedTodos: Todo[] = [];
   // todos : Observable<Todo[]>|undefined;
@@ -32,6 +34,7 @@ export class UncompletedTodosComponent {
     //this.selectedTodo.completed = true;
     this.todoService.completeTodo(this.selectedTodo.id).subscribe(() => {
       this.loadTodos();
+      this.todoCompleted.emit();
     });
 
   }
@@ -47,7 +50,7 @@ export class UncompletedTodosComponent {
 
   private loadTodos() {
     // this.noneCompletedTodos = this.todoService.allTodos.filter(t => !t.completed);
-    this.todos = this.todoService.getAllTodos();
+    this.todos = this.todoService.getUncompletedTodos();
     this.selectedTodo = undefined;
     this.newTodo = '';
   }

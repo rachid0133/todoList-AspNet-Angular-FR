@@ -5,6 +5,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { FormsModule } from "@angular/forms";
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { DividerModule } from 'primeng/divider';
 import { HttpClientModule } from '@angular/common/http'
 
 
@@ -23,6 +24,7 @@ import { CompletedTodosComponent } from './completed-todos/completed-todos.compo
     CompletedTodosComponent
   ],
   imports: [
+    DividerModule,
     HttpClientModule,
     InputTextModule,
     ButtonModule,

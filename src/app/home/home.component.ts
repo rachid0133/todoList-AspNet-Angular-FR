@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Todo } from '../models/todo.model';
+import { TodosService } from '../services/todos.service';
 
 
 @Component({
@@ -8,10 +11,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-
-  constructor() { }
+  completedTodos: Observable<Todo[]> | undefined;
+  constructor(private todoService: TodosService) { }
 
   ngOnInit(): void {
+    this.loadCompletedTodos();
+  }
+
+
+  ontCompleted() {
+    //load completed
+    this.loadCompletedTodos();
+  }
+
+  private loadCompletedTodos() {
+    this.completedTodos = this.todoService.getCompletedTodos();
   }
 
 }

@@ -11,8 +11,12 @@ export class TodosService {
 
   constructor(private http: HttpClient) { }
 
-  getAllTodos() {
+  getUncompletedTodos() {
     return this.http.get<Todo[]>(BASE_URL+'/todos');
+  }
+
+  getCompletedTodos() {
+    return this.http.get<Todo[]>(BASE_URL+'/todos/completed');
   }
 
   addTodo(todo:Todo){

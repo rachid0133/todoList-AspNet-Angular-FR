@@ -12,11 +12,15 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { UncompletedTodosComponent } from './uncompleted-todos/uncompleted-todos.component';
+import { CompletedTodosComponent } from './completed-todos/completed-todos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    UncompletedTodosComponent,
+    CompletedTodosComponent
   ],
   imports: [
     HttpClientModule,

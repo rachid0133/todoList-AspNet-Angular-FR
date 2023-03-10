@@ -11,21 +11,21 @@ import { TodosService } from '../services/todos.service';
 })
 export class HomeComponent implements OnInit {
 
-  completedTodos: Observable<Todo[]> | undefined;
-  constructor(private todoService: TodosService) { }
+  // completedTodos: Observable<Todo[]> | undefined;
+  constructor() { }
 
   ngOnInit(): void {
-    this.loadCompletedTodos();
+    // this.loadCompletedTodos();
   }
 
 
-  ontCompleted() {
-    //load completed
-    this.loadCompletedTodos();
-  }
+  // ontCompleted() {
+  //   //load completed
+  //   this.loadCompletedTodos();
+  // }
 
-  private loadCompletedTodos() {
-    this.completedTodos = this.todoService.getCompletedTodos();
-  }
+  // private loadCompletedTodos() {
+  //   this.completedTodos = this.todoService.getCompletedTodos();
+  // }
 
 }

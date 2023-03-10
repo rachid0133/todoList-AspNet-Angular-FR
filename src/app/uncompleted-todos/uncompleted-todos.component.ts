@@ -10,7 +10,7 @@ import { TodosService } from '../services/todos.service';
 })
 export class UncompletedTodosComponent implements OnInit {
 
-  @Output() todoCompleted = new EventEmitter();
+  //@Output() todoCompleted = new EventEmitter();
 
   // noneCompletedTodos: Todo[] = [];
   // todos : Observable<Todo[]>|undefined;
@@ -34,7 +34,7 @@ export class UncompletedTodosComponent implements OnInit {
     //this.selectedTodo.completed = true;
     this.todoService.completeTodo(this.selectedTodo.id).subscribe(() => {
       this.loadTodos();
-      this.todoCompleted.emit();
+      //this.todoCompleted.emit();
     });
 
   }

@@ -10,13 +10,18 @@ import { TodosService } from '../services/todos.service';
 })
 export class CompletedTodosComponent implements OnInit {
 
-  @Input() todos: Observable<Todo[]> | undefined;
+  todos: Observable<Todo[]> | undefined;
 
-  constructor() {
+  constructor(private todoService: TodosService) {
   }
 
   ngOnInit(): void {
-
+    this.loadCompletedTodos();
+    this.todoService.todoCompleted.subscribe(() => {
+      this.loadCompletedTodos();
+    });
   }
-
+  private loadCompletedTodos() {
+    this.todos = this.todoService.getCompletedTodos();
+  }
 }

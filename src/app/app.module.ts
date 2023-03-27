@@ -15,6 +15,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { UncompletedTodosComponent } from './uncompleted-todos/uncompleted-todos.component';
 import { CompletedTodosComponent } from './completed-todos/completed-todos.component';
+import { StoreModule } from '@ngrx/store';
+import {todosReducer} from './store/todos.reducers'
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { CompletedTodosComponent } from './completed-todos/completed-todos.compo
     ListboxModule,
     CommonModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot(todosReducer)
   ],
   providers: [],
   bootstrap: [AppComponent]

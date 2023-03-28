@@ -22,7 +22,7 @@ export class TodosService {
   }
 
   addTodo(todo: Todo) {
-    return this.http.post(BASE_URL + '/todos', todo);
+    return this.http.post<Todo>(BASE_URL + '/todos', todo);
   }
 
   completeTodo(id: number) {

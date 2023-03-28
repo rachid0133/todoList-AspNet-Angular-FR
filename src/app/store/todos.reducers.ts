@@ -22,8 +22,20 @@ export function todosReducer(state= initialState, action: todoAction.Actions):To
         // }
         case todoAction.TodoActionType.LOAD_TODOS_SUCCESS:{
             return{
-            //  ...state,
+             ...state,
              todos: action.payload
+            } 
+         }
+         case todoAction.TodoActionType.LOAD_TODOS_FIAL:{
+            return{
+             ...state,
+             todos:[]
+            } 
+         }
+         case todoAction.TodoActionType.CREATE_UNCOMPLETED_TODO_SUCCESS:{
+            return{
+             ...state,
+            //  todos: todos.push(action.payload)
             } 
          }
          case todoAction.TodoActionType.LOAD_TODOS_FIAL:{

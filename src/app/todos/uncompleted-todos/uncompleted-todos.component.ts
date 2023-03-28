@@ -26,8 +26,8 @@ export class UncompletedTodosComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new todoActions.LoadUncompletedTodos());
     //this.store.subscribe(data => this.todos = data.todos);
-    this.todos$ = this.store.pipe(select(fromState.getUncompletedTodosSelect));
-    //this.loadTodos();
+    
+    this.loadTodos();
   }
 
   onTodoSelect() {
@@ -49,14 +49,17 @@ export class UncompletedTodosComponent implements OnInit {
     if (!this.newTodo) return;
     const myNewTodo: Todo = { id: 0, text: this.newTodo, completed: false };
     // this.todoService.allTodos.push(myNewTodo);
-    this.todoService.addTodo(myNewTodo).subscribe(() => {
-      this.loadTodos();
-    });
+    // this.todoService.addTodo(myNewTodo).subscribe(() => {
+    //   this.loadTodos();
+    // });
+    this.store.dispatch(new todoActions.CreateTodo(myNewTodo));
+    this.loadTodos();
   }
 
   private loadTodos() {
     // this.noneCompletedTodos = this.todoService.allTodos.filter(t => !t.completed);
     //this.todos = this.todoService.getUncompletedTodos();
+    this.todos$ = this.store.pipe(select(fromState.getUncompletedTodosSelect));
     this.selectedTodo = undefined;
     this.newTodo = '';
   }

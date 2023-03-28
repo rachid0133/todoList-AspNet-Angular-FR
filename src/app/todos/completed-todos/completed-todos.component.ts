@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Todo } from '../models/todo.model';
-import { TodosService } from '../services/todos.service';
+import { Todo } from '../../models/todo.model';
+import { TodosService } from '../../services/todos.service';
 
 @Component({
   selector: 'app-completed-todos',

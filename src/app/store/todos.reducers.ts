@@ -1,27 +1,28 @@
+import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { Todo } from "../models/todo.model";
 import * as todoAction from "./todos.actions";
 
 export interface TodoState{
     todos: Todo[];
-    error: string;
+    // error: string;
 }
 
 export const initialState: TodoState = {
     todos: [],
-    error:''
+    // error:''
 }
 
 export function todosReducer(state= initialState, action: todoAction.Actions):TodoState{
 
     switch(action.type){
-        case todoAction.TodoActionType.LOAD_TODOS:{
-           return{
-            ...state
-           } 
-        }
+        // case todoAction.TodoActionType.LOAD_TODOS:{
+        //    return{
+        //     ...state
+        //    } 
+        // }
         case todoAction.TodoActionType.LOAD_TODOS_SUCCESS:{
             return{
-             ...state,
+            //  ...state,
              todos: action.payload
             } 
          }
@@ -36,3 +37,6 @@ export function todosReducer(state= initialState, action: todoAction.Actions):To
     }
 
 }
+
+const getUncompletedTodoFeatureState = createFeatureSelector<TodoState>('todos');
+export const getUncompletedTodosSelect = createSelector(getUncompletedTodoFeatureState, (state:TodoState)=>state.todos);

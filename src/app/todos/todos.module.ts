@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CompletedTodosComponent } from '../completed-todos/completed-todos.component';
-import { UncompletedTodosComponent } from '../uncompleted-todos/uncompleted-todos.component';
+import { CompletedTodosComponent } from './completed-todos/completed-todos.component';
+import { UncompletedTodosComponent } from './uncompleted-todos/uncompleted-todos.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { StoreModule } from '@ngrx/store';
@@ -11,11 +11,11 @@ import { TodoEffect } from '../store/todos.effect';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ListboxModule } from 'primeng/listbox';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 
 
-// const todoRoutes: Routes = [{ path: "", component: HomeComponent }]
+const todoRoutes: Routes = [{ path: "", component: HomeComponent }]
 
 @NgModule({
   declarations: [CompletedTodosComponent,
@@ -25,10 +25,14 @@ import { FormsModule } from "@angular/forms";
     ButtonModule,
     InputTextModule,
     ListboxModule,
+    ReactiveFormsModule,
     FormsModule,
-    // RouterModule.forChild(todoRoutes),
+    RouterModule.forChild(todoRoutes),
     StoreModule.forFeature('todos', todosReducer),
     EffectsModule.forFeature([TodoEffect])
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports: [CompletedTodosComponent,
+    UncompletedTodosComponent]
 })
 export class TodosModule { }

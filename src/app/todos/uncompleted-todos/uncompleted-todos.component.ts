@@ -1,10 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Todo } from '../models/todo.model';
-import { TodosService } from '../services/todos.service';
-import * as todoActions from '../store/todos.actions';
-import * as fromState from '../store/todos.reducers';
+import { Todo } from '../../models/todo.model';
+import { TodosService } from '../../services/todos.service';
+import * as todoActions from '../../store/todos.actions';
+import * as fromState from '../../store/todos.reducers';
 
 @Component({
   selector: 'app-uncompleted-todos',
@@ -16,8 +16,8 @@ export class UncompletedTodosComponent implements OnInit {
   //@Output() todoCompleted = new EventEmitter();
 
   // noneCompletedTodos: Todo[] = [];
-  // todos : Observable<Todo[]>|undefined;
-  todos: Observable<Todo[]> | undefined;
+   //todos : Todo[] = [];
+  todos$: Observable<Todo[]> | undefined;
   selectedTodo: Todo | undefined;
   newTodo: string = '';
 
@@ -25,8 +25,8 @@ export class UncompletedTodosComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new todoActions.LoadUncompletedTodos());
-    //const todoUncomp = this.todoService.getUncompletedTodos();
-    this.store.subscribe(data => console.log(data));
+    //this.store.subscribe(data => this.todos = data.todos);
+    this.todos$ = this.store.pipe(select(fromState.getUncompletedTodosSelect));
     //this.loadTodos();
   }
 

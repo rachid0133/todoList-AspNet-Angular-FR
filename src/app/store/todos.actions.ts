@@ -4,7 +4,7 @@ import { Todo } from "../models/todo.model";
 export enum TodoActionType {
     LOAD_TODOS = '[Todo] Load Todos',
     LOAD_TODOS_SUCCESS = '[Todo] Load Todos Success',
-    LOAD_TODOS_FIAL = '[Todo] Load Todos',
+    LOAD_TODOS_FIAL = '[Todo] Load Todos Fail',
 }
 
 export class LoadUncompletedTodos implements Action {

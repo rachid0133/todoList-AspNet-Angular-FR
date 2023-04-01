@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Todo } from '../../models/todo.model';
@@ -16,17 +17,24 @@ export class UncompletedTodosComponent implements OnInit {
   //@Output() todoCompleted = new EventEmitter();
 
   // noneCompletedTodos: Todo[] = [];
-   //todos : Todo[] = [];
+  //todos : Todo[] = [];
   todos$: Observable<Todo[]> | undefined;
   selectedTodo: Todo | undefined;
-  newTodo: string = '';
+  // newTodo: string = '';
 
-  constructor(private todoService: TodosService, private store: Store<fromState.TodoState>) { }
+  todoForm = new FormGroup({
+    newTodo: new FormControl(''),
+  });
+
+  constructor(private fb: FormBuilder, private todoService: TodosService, private store: Store<fromState.AppState>) { }
 
   ngOnInit(): void {
+    this.todoForm = this.fb.group({
+      newTodo: ["", Validators.required]
+    });
     this.store.dispatch(new todoActions.LoadUncompletedTodos());
     //this.store.subscribe(data => this.todos = data.todos);
-    
+
     this.loadTodos();
   }
 
@@ -38,22 +46,28 @@ export class UncompletedTodosComponent implements OnInit {
   onComplete() {
     if (!this.selectedTodo) return;
     //this.selectedTodo.completed = true;
-    this.todoService.completeTodo(this.selectedTodo.id).subscribe(() => {
-      this.loadTodos();
-      //this.todoCompleted.emit();
-    });
+    // this.todoService.completeTodo(this.selectedTodo.id).subscribe(() => {
+    //   this.loadTodos();
+    //   //this.todoCompleted.emit();
+    // });
+    //const selectedOne: Todo = {id: this.selectedTodo.id, text: this.selectedTodo.text, completed: this.selectedTodo.completed}
+    this.store.dispatch(new todoActions.CreateCompletedTodo(this.selectedTodo));
+    this.loadTodos();
 
   }
 
   onAdd() {
-    if (!this.newTodo) return;
-    const myNewTodo: Todo = { id: 0, text: this.newTodo, completed: false };
+    // if (!this.newTodo) return;
+    const myNewTodo: Todo = { id: 0, text: this.todoForm.get('newTodo')!.value, completed: false };
     // this.todoService.allTodos.push(myNewTodo);
     // this.todoService.addTodo(myNewTodo).subscribe(() => {
     //   this.loadTodos();
     // });
-    this.store.dispatch(new todoActions.CreateTodo(myNewTodo));
+
+    this.store.dispatch(todoActions.CreateTodo({ payload: myNewTodo }));
     this.loadTodos();
+
+
   }
 
   private loadTodos() {
@@ -61,7 +75,8 @@ export class UncompletedTodosComponent implements OnInit {
     //this.todos = this.todoService.getUncompletedTodos();
     this.todos$ = this.store.pipe(select(fromState.getUncompletedTodosSelect));
     this.selectedTodo = undefined;
-    this.newTodo = '';
+    // this.newTodo = '';
+    this.todoForm.reset();
   }
 
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, tap } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { Todo } from '../models/todo.model';
 
 const BASE_URL = 'https://localhost:44319/api';
@@ -21,7 +21,7 @@ export class TodosService {
     return this.http.get<Todo[]>(BASE_URL + '/todos/completed');
   }
 
-  addTodo(todo: Todo) {
+  addTodo(todo: Todo): Observable<Todo> {
     return this.http.post<Todo>(BASE_URL + '/todos', todo);
   }
 
